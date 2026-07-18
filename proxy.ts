@@ -18,8 +18,31 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-export function proxy(_request: NextRequest): NextResponse {
-  // Phase 0: pass all requests through. Phase 2 adds auth checks here.
+export async function proxy(request: NextRequest): Promise<NextResponse> {
+  const cookie = request.headers.get("cookie") || "";
+  
+  // Call the Better Auth session endpoint
+  const res = await fetch(`${request.nextUrl.origin}/api/auth/get-session`, {
+    headers: { cookie },
+  });
+
+  // Better Auth returns a JSON object with { session, user } if authenticated, or 401 if not.
+  const data = res.ok ? await res.json().catch(() => null) : null;
+  const session = data?.session || null;
+
+  const isApiRoute = request.nextUrl.pathname.startsWith("/api/");
+  
+  if (!session) {
+    if (isApiRoute) {
+      return NextResponse.json(
+        { success: false, error: { message: "Authentication required", code: "UNAUTHORIZED" } }, 
+        { status: 401 }
+      );
+    } else {
+      return NextResponse.redirect(new URL("/login", request.url));
+    }
+  }
+
   return NextResponse.next();
 }
 

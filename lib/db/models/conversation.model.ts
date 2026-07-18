@@ -1,7 +1,19 @@
-/**
- * Conversation model — Phase 1 implements this fully.
- * Shell created in Phase 0 to satisfy folder-structure.md.
- */
+import mongoose, { Schema, Document, Model } from "mongoose";
 
-// TODO (Phase 1): implement per database-schema.md §5
-export {};
+export interface IConversation extends Document {
+  userId: mongoose.Types.ObjectId;
+  roadmapId: mongoose.Types.ObjectId;
+  createdAt: Date;
+}
+
+const conversationSchema = new Schema<IConversation>({
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  roadmapId: { type: Schema.Types.ObjectId, ref: "Roadmap", required: true },
+  createdAt: { type: Date, default: Date.now },
+});
+
+conversationSchema.index({ userId: 1, roadmapId: 1 });
+
+export const Conversation: Model<IConversation> =
+  mongoose.models.Conversation ||
+  mongoose.model<IConversation>("Conversation", conversationSchema);

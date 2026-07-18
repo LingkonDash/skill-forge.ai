@@ -9,6 +9,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import { getThemeInitScript } from "@/lib/utils/theme";
+import { Navbar } from "@/components/landing/navbar";
 import "./globals.css";
 
 // ── Fonts ────────────────────────────────────────────────────────────────
@@ -64,7 +65,10 @@ export default function RootLayout({
         />
       </head>
       <body className="bg-bg text-text min-h-dvh flex flex-col antialiased">
-        {children}
+        <Navbar />
+        <main className="flex-1 flex flex-col">
+          {children}
+        </main>
       </body>
     </html>
   );
