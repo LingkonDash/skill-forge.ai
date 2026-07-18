@@ -25,7 +25,7 @@ After finishing work on a phase:
 | 0 — Project Scaffolding & Environment | Complete | Handled Next.js 16 and Tailwind v4 deprecations/conventions |
 | 1 — Database Models | Complete | All 6 Mongoose models implemented and tested |
 | 2 — Authentication | Complete | Better Auth integration with MongoDB adapter |
-| 3 — Core Design System & Layout | Not Started | |
+| 3 — Core Design System & Layout | Complete | Implemented UI primitives, responsive Navbar & Footer using custom color tokens |
 | 4 — Landing Page | Not Started | |
 | 5 — Roadmap Creation (AI Slice) | Not Started | |
 | 6 — Roadmap Management | Not Started | |
@@ -45,6 +45,7 @@ Status values: `Not Started` → `In Progress` → `Complete`. Only mark `Comple
 
 *(Newest entries at the top. Each entry: date, phase, what was actually built/verified.)*
 
+- **2026-07-18**: Phase 3 — Built core UI primitives (Button, Input, Select, Card, Badge, Modal, Skeleton) utilizing custom theme variables. Polish global typography settings and focus states. Refactored the global Navbar for stateful sessions and created a responsive Footer using the theme tokens. Verified that the app type-checks clean without raw default Tailwind color utilities.
 - **2026-07-18**: Phase 2 — Integrated Better Auth with MongoDB (`@better-auth/mongo-adapter`), mapping to the existing `User` schema. Implemented `proxy.ts` middleware route protection utilizing native fetch. Built frontend login and register pages with basic UI, updating the navbar to include auth state and a working theme toggle.
 - **2026-07-18**: Phase 1 — Implemented all six Mongoose models (`User`, `Roadmap`, `Progress`, `Review`, `Conversation`, `Message`) based strictly on the `database-schema.md`. Correctly applied `toJSON` transform on the `User` model to omit `passwordHash`, and defined all unique and compound indexes. Executed a manual test script to verify successful insertion and validation of all models.
 - **2026-07-18**: Phase 0 — Scaffolded single unified Next.js 16 application, configured Mongoose connection wrapper (`lib/db/connection.ts`), verified database connection via the public health-check route `/api/health` returning `{"success":true,"data":{"status":"ok","db":"connected"}}`. Set up Next.js 16 `proxy.ts` (pass-through router protection shell), integrated Tailwind CSS v4 design tokens in `app/globals.css`, and configured root layout with injected theme initialization script (`lib/utils/theme.ts`). Created empty Mongoose model shells in `lib/db/models/` and empty domain folder structures in `lib/domains/`.
@@ -73,4 +74,4 @@ Status values: `Not Started` → `In Progress` → `Complete`. Only mark `Comple
 
 *(Keep this section short and current — overwrite it each time, unlike the logs above which only append. A few sentences on: what works end-to-end right now, and what the very next piece of work is.)*
 
-Phase 2 (Authentication) is complete. Better Auth is integrated natively with MongoDB and our `User` schema. Route protection is handled gracefully through Next.js proxy middleware, and users can register and login. The next piece of work is Phase 3 — Core Design System & Layout.
+Phase 3 (Core Design System & Layout) is complete. Reusable primitives and core layouts are fully themed and support responsive light/dark modes. The next piece of work is Phase 4 — Landing Page.
