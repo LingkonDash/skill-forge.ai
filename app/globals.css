@@ -1,1 +1,55 @@
 @import "tailwindcss";
+
+/* ── Design Token Layer ──────────────────────────────────────────────────── */
+/* All colour/type tokens are CSS custom properties switched by data-theme.   */
+/* Tailwind v4 maps these via @theme so utility classes reference variables.  */
+
+:root[data-theme="light"] {
+  --color-primary: #0F766E;
+  --color-accent:  #D97706;
+  --color-bg:      #FAFAF9;
+  --color-surface: #FFFFFF;
+  --color-text:    #14181C;
+  --color-text-muted: #5B6469;
+  --color-border:  #E4E7E8;
+  --color-error:   #DC2626;
+}
+
+:root[data-theme="dark"] {
+  --color-primary: #2DD4BF;
+  --color-accent:  #FBBF24;
+  --color-bg:      #12181B;
+  --color-surface: #1B2327;
+  --color-text:    #EDEFF0;
+  --color-text-muted: #8B959A;
+  --color-border:  #2A3438;
+  --color-error:   #F87171;
+}
+
+/* ── Map tokens into Tailwind v4 theme ───────────────────────────────────── */
+@theme {
+  --color-primary:    var(--color-primary);
+  --color-accent:     var(--color-accent);
+  --color-bg:         var(--color-bg);
+  --color-surface:    var(--color-surface);
+  --color-text:       var(--color-text);
+  --color-muted:      var(--color-text-muted);
+  --color-border:     var(--color-border);
+  --color-error:      var(--color-error);
+
+  /* Typography families (loaded via next/font in layout) */
+  --font-display: var(--font-space-grotesk), ui-sans-serif, system-ui, sans-serif;
+  --font-body:    var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono:    var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+/* ── Base resets ─────────────────────────────────────────────────────────── */
+html {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+body {
+  font-family: var(--font-body);
+  min-height: 100dvh;
+}

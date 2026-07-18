@@ -22,7 +22,7 @@ After finishing work on a phase:
 
 | Phase | Status | Notes |
 |---|---|---|
-| 0 — Project Scaffolding & Environment | Not Started | |
+| 0 — Project Scaffolding & Environment | Complete | Handled Next.js 16 and Tailwind v4 deprecations/conventions |
 | 1 — Database Models | Not Started | |
 | 2 — Authentication | Not Started | |
 | 3 — Core Design System & Layout | Not Started | |
@@ -45,7 +45,7 @@ Status values: `Not Started` → `In Progress` → `Complete`. Only mark `Comple
 
 *(Newest entries at the top. Each entry: date, phase, what was actually built/verified.)*
 
-- _No entries yet — this section fills in as phases are completed._
+- **2026-07-18**: Phase 0 — Scaffolded single unified Next.js 16 application, configured Mongoose connection wrapper (`lib/db/connection.ts`), verified database connection via the public health-check route `/api/health` returning `{"success":true,"data":{"status":"ok","db":"connected"}}`. Set up Next.js 16 `proxy.ts` (pass-through router protection shell), integrated Tailwind CSS v4 design tokens in `app/globals.css`, and configured root layout with injected theme initialization script (`lib/utils/theme.ts`). Created empty Mongoose model shells in `lib/db/models/` and empty domain folder structures in `lib/domains/`.
 
 ---
 
@@ -53,7 +53,9 @@ Status values: `Not Started` → `In Progress` → `Complete`. Only mark `Comple
 
 *(Log any decision made during implementation that wasn't already specified in the instruction docs — e.g. a library version pinned, an edge case resolved a specific way. Include brief reasoning.)*
 
-- _No entries yet._
+- **Consolidated Single App Architecture**: Migrated from the three-tier Express/React split to a single consolidated Next.js App Router application. Enforced client/server boundary conventions strictly per the guidelines.
+- **Next.js 16 Proxy Routing**: Renamed deprecated `middleware.ts` to `proxy.ts` and exported `proxy` function instead of `middleware` to align with Next.js 16 specifications and eliminate startup warnings.
+- **Tailwind CSS v4 Integration**: Configured visual color tokens directly inside `@theme` in `app/globals.css` with a data-theme switcher on the `<html>` element, replacing the standalone `tailwind.config.ts` per Tailwind v4 configuration specifications.
 
 ---
 
@@ -69,4 +71,4 @@ Status values: `Not Started` → `In Progress` → `Complete`. Only mark `Comple
 
 *(Keep this section short and current — overwrite it each time, unlike the logs above which only append. A few sentences on: what works end-to-end right now, and what the very next piece of work is.)*
 
-Nothing built yet. Next step: Phase 0 — project scaffolding.
+Phase 0 (Project Scaffolding & Environment) is complete. The application runs locally, successfully connects to MongoDB, serves health status via `/api/health`, and switches themes via CSS variables. The next phase is Phase 1 — Database Models.
